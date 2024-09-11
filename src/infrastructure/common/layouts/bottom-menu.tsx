@@ -6,11 +6,12 @@ import StatisticalScreen from '../../../screen/dashboard/statistical';
 import ExcavatorScreen from '../../../screen/dashboard/excavator';
 import CategoryScreen from '../../../screen/category';
 import MaintenanceScreen from '../../../screen/maintenance';
+import UserScreen from '../../../screen/user';
 
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
-function DrawsLayout() {
+function BottomMenu() {
     return (
         <Tab.Navigator
             initialRouteName={"StatisticalScreen"}
@@ -39,6 +40,10 @@ function DrawsLayout() {
                 name={"Bảo dưỡng"}
                 component={MaintenanceScreen}
             />
+            <Tab.Screen
+                name={"Người dùng"}
+                component={UserScreen}
+            />
         </Tab.Navigator>
         // <Drawer.Navigator initialRouteName="StatisticalScreen">
         //     <Drawer.Screen name="StatisticalScreen" component={StatisticalScreen} />
@@ -47,4 +52,4 @@ function DrawsLayout() {
 
     );
 }
-export default DrawsLayout;
+export default BottomMenu;

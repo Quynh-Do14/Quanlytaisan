@@ -1,11 +1,23 @@
-import React from 'react'
-import { Image, StyleSheet, Text, View } from 'react-native'
+import React, { useState } from 'react'
+import { Image, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import Foundation from 'react-native-vector-icons/EvilIcons';
+import DrawerNavigator from './draws';
 const MainLayout = ({ ...props }: any) => {
+    const [isDraw, setIsDraw] = useState<boolean>(false);
     return (
         <View style={styles.container}>
+            {
+                isDraw
+                &&
+                <TouchableOpacity onPress={() => setIsDraw(false)} style={styles.overlay}>
+                </TouchableOpacity>
+
+            }
+            <DrawerNavigator isDraw={isDraw} setIsDraw={setIsDraw} />
             <View style={styles.header}>
-                <Foundation name="navicon" size={32} color="#ffffff" />
+                <TouchableOpacity onPress={() => setIsDraw(!isDraw)}>
+                    <Foundation name="navicon" size={32} color="#ffffff" />
+                </TouchableOpacity>
                 <Image
                     source={require("../../../assets/images/avatar.png")}
                     resizeMode={"contain"}
@@ -18,6 +30,7 @@ const MainLayout = ({ ...props }: any) => {
                     }}
                 />
             </View>
+
             {props.children}
         </View >
 
@@ -28,6 +41,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: "#ffffff",
         flex: 1,
+        position: "relative",
     },
     content: {
         flex: 1
@@ -62,6 +76,13 @@ const styles = StyleSheet.create({
         fontFamily: "Roboto Regular",
         fontSize: 16,
         fontWeight: "900",
+    },
+    overlay: {
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        backgroundColor: '#d4d4d44a',
+        zIndex: 1,
     }
 })
 
